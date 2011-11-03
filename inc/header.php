@@ -13,5 +13,6 @@ if (get_magic_quotes_gpc()) {
 
 $content = '';
 if (isset($_POST['html_to_clean'])) {
-    $content = HTMLLisible($_POST['html_to_clean'], "\t", $balises_one_line);
+    $HTML_Lisible = new HTMLLisible();
+	$content = $HTML_Lisible->HTML_Lisible($_POST['html_to_clean'], "\t", $balises_one_line);
 }

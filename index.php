@@ -1,5 +1,10 @@
 <?php
 include dirname(__FILE__).'/inc/header.php';
+
+
+#echo $content;die;
+
+
 ?>
 <!DOCTYPE HTML>
 <html lang="fr-FR">
