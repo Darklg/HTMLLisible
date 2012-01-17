@@ -64,7 +64,7 @@ class HTMLLisible {
 	    $html = str_replace('>', '>' . "\n", $html);
 	    $html = str_replace('<', "\n" . '<', $html);
 
-	    // On dédouble les sauts de ligne
+	    // On dédoublonne les sauts de ligne
 	    $html = str_replace("\n\n", "\n", $html);
 		
 		return $html;
@@ -81,25 +81,36 @@ class HTMLLisible {
 	    $this->retour_html = '';
 	    $lignes_html = explode("\n", $this->html);
 	    $indentation_lvl = 0;
-	    foreach ($lignes_html as $ligne) {
+		$was_content = false;
+	    foreach ($lignes_html as $id_ligne => $ligne) {
+			$ligne = trim($ligne);
+		
 	        // On détecte si la ligne est une balise ouvrante ou fermante
 	        $is_fermante = (isset($ligne[1]) && $ligne[1] == '/');
 	        $is_ouvrante = !$is_fermante && (isset($ligne[0]) && $ligne[0] == '<');
 	        $is_unique = (substr($ligne, -2) == '/>' || substr($ligne, 0, 2) == '<!');
+			
+			// On détecte si la ligne suivante ou précédente contient du contenu
+			$is_content = (isset($ligne[1]) && $ligne[0] != '<');
+			$will_be_content = isset($lignes_html[$id_ligne+1], $lignes_html[$id_ligne+1][1]) && $lignes_html[$id_ligne+1][0] != '<';
 
 	        // On traite l'indentation et on charge le fichier
 	        if ($is_fermante && !$is_unique)
 	            $indentation_lvl--;
-	        $this->retour_html .= $this->hl_pad($indentation_pad, $indentation_lvl) . $ligne . "\n";
+
+	        $this->retour_html .= 
+				($is_content || $was_content ? '' : $this->hl_pad($indentation_pad, $indentation_lvl)) .
+	 			$ligne . 
+				($is_content || $will_be_content ? '':"\n");
+				
 	        if ($is_ouvrante && !$is_unique)
 	            $indentation_lvl++;
+	
+
+			$was_content = $is_content;
+			
 	    }
 
-	    foreach ($balises_one_line as $balise) {
-	        $this->retour_html = preg_replace('#([\n\t]*)</' . $balise . '>#U', '</' . $balise . '>', $this->retour_html);
-	        $this->retour_html = preg_replace('#<' . $balise . '>(.*)([\S])#sU', '<' . $balise . '>$2', $this->retour_html);
-	        $this->retour_html = preg_replace('#<' . $balise . ' (.*)>(.*)([\S])#sU', '<' . $balise . ' $1>$3', $this->retour_html);
-	    }
 
 		$this->retour_html = $this->remise_blocs($this->retour_html);
 
