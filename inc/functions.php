@@ -70,6 +70,16 @@ class HTMLLisible {
 		return $html;
 	}
 	
+	// Petit ménage
+	private function little_clean($html){
+		
+		// Attributs contenant du PHP
+	    $html = preg_replace('#"([\s]+)<\?php#isU', '"<?php', $html);
+	    $html = preg_replace('#\?>([\s]+)"#isU', '?>"', $html);
+
+		return $html;
+	}
+	
 	
 	public function HTML_Lisible($html, $indentation_pad = "\t", $balises_one_line = array()) {
 
@@ -146,8 +156,9 @@ class HTMLLisible {
 	    }
 
 		$this->retour_html = $this->remise_blocs($this->retour_html);
-
-
+		
+		$this->retour_html = $this->little_clean($this->retour_html);
+		
 	    return trim($this->retour_html);
 	}
 	
