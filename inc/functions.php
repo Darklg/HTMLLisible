@@ -23,6 +23,10 @@ class HTMLLisible {
 				'regex' => '#<script(.*)\/script>#isU',
 				'list' => array()
 			),
+			'cond' => array(
+				'regex' => '#<!--(.*)-->#isU',
+				'list' => array()
+			),
 		);
 	}
 	
