@@ -82,7 +82,15 @@ class HTMLLisible {
 	    $lignes_html = explode("\n", $this->html);
 	    $indentation_lvl = 0;
 		$was_content = false;
+		$indent_before = false;
+		$line_before = false;
+		$line_after = true;
+		
 	    foreach ($lignes_html as $id_ligne => $ligne) {
+		
+			$old_indent_before = $indent_before;
+			$old_line_after = $line_after;
+		
 			$ligne = trim($ligne);
 		
 	        // On détecte si la ligne est une balise ouvrante ou fermante
@@ -92,25 +100,48 @@ class HTMLLisible {
 			
 			// On détecte si la ligne suivante ou précédente contient du contenu
 			$is_content = (isset($ligne[1]) && $ligne[0] != '<');
-			$will_be_content = isset($lignes_html[$id_ligne+1], $lignes_html[$id_ligne+1][1]) && $lignes_html[$id_ligne+1][0] != '<';
+			$will_be_content = isset($lignes_html[$id_ligne+1], $lignes_html[$id_ligne+1][0]) && $lignes_html[$id_ligne+1][0] != '<';
+			
+			// On détecte si les ligne suivantes et précédentes contient une balise ouvrante ou fermante
+			$was_fermante = isset($lignes_html[$id_ligne-1], $lignes_html[$id_ligne-1][1]) && $lignes_html[$id_ligne-1][1] == '/';
+			$was_ouvrante = isset($lignes_html[$id_ligne-1], $lignes_html[$id_ligne-1][1]) && $lignes_html[$id_ligne-1][1] != '/' && $lignes_html[$id_ligne-1][0] == '<';
+			$will_be_fermante = isset($lignes_html[$id_ligne+1], $lignes_html[$id_ligne+1][1]) && $lignes_html[$id_ligne+1][1] == '/';
+			$will_be_ouvrante = isset($lignes_html[$id_ligne+1], $lignes_html[$id_ligne+1][1]) && $lignes_html[$id_ligne+1][1] != '/' && $lignes_html[$id_ligne+1][0] == '<';
 
 	        // On traite l'indentation et on charge le fichier
 	        if ($is_fermante && !$is_unique)
 	            $indentation_lvl--;
-
-	        $this->retour_html .= 
-				($is_content || $was_content ? '' : $this->hl_pad($indentation_pad, $indentation_lvl)) .
-	 			$ligne . 
-				($is_content || $will_be_content ? '':"\n");
+			
+			// On gère les paramètres d'indentation avant la ligne
+			$indent_before = $old_line_after;
+			
+			// On gère les paramètres de retour après la ligne
+			$line_after = true;
+			if($is_ouvrante && $will_be_content)
+				$line_after = false;
+			if($was_ouvrante && $is_content && $will_be_fermante && !$old_line_after)
+				$line_after = false;
+			if($is_ouvrante && $will_be_fermante)
+				$line_after = false;
+			
+			$line_before = false;
+			if($was_ouvrante && $is_content && $will_be_ouvrante){
+				$indent_before = true;
+				$line_before = true;
+				$old_line_before = true;
+			}
+			
+	        $this->retour_html .=
+				($line_before ? "\n" : '').
+				($indent_before ? $this->hl_pad($indentation_pad, $indentation_lvl) : '') . 
+				$ligne . 
+				($line_after ? "\n" : '');
 				
 	        if ($is_ouvrante && !$is_unique)
 	            $indentation_lvl++;
-	
-
 			$was_content = $is_content;
 			
 	    }
-
 
 		$this->retour_html = $this->remise_blocs($this->retour_html);
 
