@@ -123,6 +123,8 @@ class HTMLLisible {
 				$line_after = false;
 			if($is_ouvrante && $will_be_fermante)
 				$line_after = false;
+			if($is_unique)
+				$line_after = true;
 			
 			$line_before = false;
 			if($was_ouvrante && $is_content && $will_be_ouvrante){
