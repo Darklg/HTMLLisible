@@ -3,45 +3,98 @@
 
 class HTMLLisible {
 	
-	private $blocs = array();
+	/* Config globale */
 	private $balises_one_line = array('a', 'b', 'button', 'em', 'h1', 'h2', 'h3', 'h4', 'i', 'img', 'input', 'label', 'span' ,'strong', 'textarea', 'title');
+	public $types_indentation = array( 
+		array('', 'aucune'),
+		array(' ', '1 espace'),
+		array('  ', '2 espaces'),
+		array('   ', '3 espaces'),
+		array('    ', '4 espaces'),
+		array("\t", '1 tab')
+	);
+	private $blocs_isoles = array(
+		'php' => array(
+			'regex' => '#<\?php(.*)\?>#isU',
+			'list' => array()
+		),
+		'css' => array(
+			'regex' => '#<style(.*)\/style>#isU',
+			'list' => array()
+		),
+		'js' => array(
+			'regex' => '#<script(.*)\/script>#isU',
+			'list' => array()
+		),
+		'cond' => array(
+			'regex' => '#<!--(.*)-->#isU',
+			'list' => array()
+		),
+	);
+	
+	/* Valeurs initiales */
 	private $limit_str_replace = 1;
 	private $html = '';
-	private $retour_html = '';
 	
+	/* Valeurs utilisées */
+	public $retour_html = '';
+	public $user_options = array(
+		'indentation' => 4
+	);
 	
 	public function __construct(){
-		$this->blocs = array(
-			'php' => array(
-				'regex' => '#<\?php(.*)\?>#isU',
-				'list' => array()
-			),
-			'css' => array(
-				'regex' => '#<style(.*)\/style>#isU',
-				'list' => array()
-			),
-			'js' => array(
-				'regex' => '#<script(.*)\/script>#isU',
-				'list' => array()
-			),
-			'cond' => array(
-				'regex' => '#<!--(.*)-->#isU',
-				'list' => array()
-			),
-		);
+		
+		if(isset($_COOKIE['options'])){
+			$this->get_options(unserialize($_COOKIE['options']));
+		}
+		
+		if (isset($_POST['html_to_clean'],$_POST['options'])) {
+			$this->get_options($_POST['options']);
+			$this->HTML_Lisible($_POST['html_to_clean']);
+			if(isset($_POST['api'])){
+				exit($this->retour_html);
+			}
+			setcookie ("options", serialize($this->user_options), time() + 3600);
+		}
+	}
+	
+	private function get_options($options = array()){
+		
+		// Si on transmet un tableau serialisé
+		if(!is_array($options)){
+			$uns = unserialize($options);
+			if(is_array($uns)){
+				$options = $uns;
+			}
+		}
+		
+		// On parse les options
+		foreach($options as $key => $valeur){
+			switch ($key) {
+				case 'indentation':
+					if(isset($this->types_indentation[$valeur])){
+						$this->user_options['indentation'] = $valeur;
+					}
+					break;
+				
+				default:
+					# code...
+					break;
+			}
+		}
 	}
 	
 	// On met de côté certains contenus de blocs
 	private function mise_ecart_blocs($html){
-		foreach($this->blocs as $type_bloc => $bloc){
+		foreach($this->blocs_isoles as $type_bloc => $bloc){
 			$matches = array();
-			preg_match_all($this->blocs[$type_bloc]['regex'],$html,$matches);
+			preg_match_all($this->blocs_isoles[$type_bloc]['regex'],$html,$matches);
 			$i=0;
 			if(isset($matches[0])){
 				foreach($matches[0] as $a_bloc){
 					$i++;
 					$html = str_replace($a_bloc,'<##__'.$type_bloc.'__'.$i.'__'.$type_bloc.'__##/>',$html,$this->limit_str_replace);
-					$this->blocs[$type_bloc]['list'][$i] = $a_bloc;
+					$this->blocs_isoles[$type_bloc]['list'][$i] = $a_bloc;
 				}
 			}
 		}
@@ -50,7 +103,7 @@ class HTMLLisible {
 	
 	private function remise_blocs($retour_html){
 		// On remet les blocks
-		foreach($this->blocs as $type_bloc => $bloc){
+		foreach($this->blocs_isoles as $type_bloc => $bloc){
 			foreach($bloc['list'] as $id_bloc => $bloca){
 				$retour_html = str_replace('<##__'.$type_bloc.'__'.$id_bloc.'__'.$type_bloc.'__##/>', $bloca, $retour_html);
 			}
@@ -81,12 +134,25 @@ class HTMLLisible {
 		// Attributs contenant du PHP
 	    $html = preg_replace('#"([\s]+)<\?php#isU', '"<?php', $html);
 	    $html = preg_replace('#\?>([\s]+)"#isU', '?>"', $html);
-
+		
+		// Suppression des éventuelles lignes vides
+		$l_html = explode("\n",$html);
+		$r_html = '';
+		foreach($l_html as $ligne){
+			if(!preg_match('#^([\s]+)$#',$ligne)){
+				$r_html .= $ligne."\n";
+			}
+		}
+		$html = $r_html;
+		
+		// Trim final
+		$html = trim($html);
+		
 		return $html;
 	}
 	
 	
-	public function HTML_Lisible($html, $indentation_pad = "\t", $balises_one_line = array()) {
+	private function HTML_Lisible($html) {
 
 		$this->html = $this->mise_ecart_blocs($html);
 		
@@ -150,7 +216,7 @@ class HTMLLisible {
 			
 	        $this->retour_html .=
 				($line_before ? "\n" : '').
-				($indent_before ? $this->hl_pad($indentation_pad, $indentation_lvl) : '') . 
+				($indent_before ? $this->hl_pad($this->types_indentation[$this->user_options['indentation']][0], $indentation_lvl) : '') . 
 				$ligne . 
 				($line_after ? "\n" : '');
 				
@@ -164,7 +230,6 @@ class HTMLLisible {
 		
 		$this->retour_html = $this->little_clean($this->retour_html);
 		
-	    return trim($this->retour_html);
 	}
 	
 	
