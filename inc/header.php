@@ -1,6 +1,5 @@
 <?php 
 include dirname(__FILE__).'/functions.php';
-include dirname(__FILE__).'/config.php';
 
 // Si les magic quotes sont activées
 if (get_magic_quotes_gpc()) {

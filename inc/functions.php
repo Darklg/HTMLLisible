@@ -4,6 +4,7 @@
 class HTMLLisible {
 	
 	private $blocs = array();
+	private $balises_one_line = array('a', 'b', 'button', 'em', 'h1', 'h2', 'h3', 'h4', 'i', 'img', 'input', 'label', 'span' ,'strong', 'textarea', 'title');
 	private $limit_str_replace = 1;
 	private $html = '';
 	private $retour_html = '';
