@@ -15,7 +15,7 @@ class HTMLLisible {
 	);
 	private $blocs_isoles = array(
 		'solotags' => array(
-			'regex' => '#<(.*)\/>#i',
+			'regex' => '#<([^\>]*)\/>#i',
 			'list' => array()
 		),
 		'php' => array(
