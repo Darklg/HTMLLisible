@@ -187,7 +187,7 @@ class HTMLLisible {
 	        $is_unique = (substr($ligne, -2) == '/>' || substr($ligne, 0, 2) == '<!');
 
 			// On détecte si la ligne suivante ou précédente contient du contenu
-			$is_content = (isset($ligne[1]) && $ligne[0] != '<');
+			$is_content = (isset($ligne[0]) && $ligne[0] != '<');
 			$will_be_content = isset($lignes_html[$id_ligne+1], $lignes_html[$id_ligne+1][0]) && $lignes_html[$id_ligne+1][0] != '<';
 
 			// On détecte si les ligne suivantes et précédentes contient une balise ouvrante ou fermante
