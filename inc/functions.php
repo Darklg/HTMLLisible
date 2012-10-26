@@ -46,8 +46,10 @@ class HTMLLisible {
 	/* Valeurs utilisées */
 	public $retour_html = '';
 	public $user_options = array(
-		'indentation' => 4
+		'indentation' => 4,
 	);
+
+	private $options_bool = array();
 
 	public function __construct(){
 
@@ -83,12 +85,16 @@ class HTMLLisible {
 						$this->user_options['indentation'] = $valeur;
 					}
 					break;
-
 				default:
 					# code...
 					break;
 			}
 		}
+
+		foreach($this->options_bool as $option){
+			$this->user_options[$option] = (isset($options[$option]) && $options[$option] == '1');
+		}
+
 	}
 
 	// On met de côté certains contenus de blocs
@@ -158,11 +164,26 @@ class HTMLLisible {
 		return $html;
 	}
 
+	//
+	private function html_to_xhtml($html){
+		$html = preg_replace('/\<(img|input|meta|link|param|base)([^>]*)([ "\'a-z]{1})\>/isU', '<$1$2$3/>', $html);
+
+		$html = str_replace('</param>','',$html);
+		$html = str_replace(array('<br >','<br>'),'<br />',$html);
+		$html = str_replace(array('<hr >','<hr>'),'<hr />',$html);
+
+		$html = str_replace('<DOCTYPE HTML','<!DOCTYPE HTML',$html);
+
+		return $html;
+	}
+
 
 	private function HTML_Lisible($html) {
 
-		$this->html = $this->mise_ecart_blocs($html);
+		$this->html = $html;
 
+		$this->html = $this->html_to_xhtml($this->html);
+		$this->html = $this->mise_ecart_blocs($this->html);
 		$this->html = $this->HTML_Order($this->html);
 
 	    // On découpe ligne par ligne
