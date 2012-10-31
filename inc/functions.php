@@ -59,9 +59,20 @@ class HTMLLisible {
 
         if (isset($_POST['html_to_clean'],$_POST['options'])) {
             $this->get_options($_POST['options']);
-            $this->HTML_Lisible($_POST['html_to_clean']);
+
+            $html = $_POST['html_to_clean'];
+
+            $html = $this->html_to_xhtml($html);
+            $html = $this->mise_ecart_blocs($html);
+            $html = $this->HTML_Order($html);
+            $html = $this->HTML_Lisible($html);
+            $html = $this->remise_blocs($html);
+            $html = $this->little_clean($html);
+
+            $this->retour_html = $html;
+
             if(isset($_POST['api'])){
-                exit($this->retour_html);
+                exit($html);
             }
             setcookie ("options", serialize($this->user_options), time() + 3600);
         }
@@ -180,15 +191,10 @@ class HTMLLisible {
 
     private function HTML_Lisible($html) {
 
-        $this->html = $html;
-
-        $this->html = $this->html_to_xhtml($this->html);
-        $this->html = $this->mise_ecart_blocs($this->html);
-        $this->html = $this->HTML_Order($this->html);
+        $retour_html = '';
 
         // On découpe ligne par ligne
-        $this->retour_html = '';
-        $lignes_html = explode("\n", $this->html);
+        $lignes_html = explode("\n", $html);
         $indentation_lvl = 0;
         $was_content = false;
         $indent_before = false;
@@ -242,7 +248,7 @@ class HTMLLisible {
                 $old_line_before = true;
             }
 
-            $this->retour_html .=
+            $retour_html .=
                 ($line_before ? "\n" : '').
                 ($indent_before ? $this->hl_pad($this->types_indentation[$this->user_options['indentation']][0], $indentation_lvl) : '') .
                 $ligne .
@@ -254,9 +260,7 @@ class HTMLLisible {
 
         }
 
-        $this->retour_html = $this->remise_blocs($this->retour_html);
-
-        $this->retour_html = $this->little_clean($this->retour_html);
+        return $retour_html;
 
     }
 
