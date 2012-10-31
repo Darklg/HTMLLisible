@@ -49,31 +49,31 @@ img,input[type=image]{vertical-align:bottom;}
    ========================================================================== */
 
 body {
-	font:62.5% Arial, Helvetica, sans-serif;
-	color:#212121; /* Dark Grey is the new black */
+    font:62.5% Arial, Helvetica, sans-serif;
+    color:#212121; /* Dark Grey is the new black */
 }
 
 #main-container {
-	width:940px;
-	margin:0 auto;
-	padding-bottom:30px;
+    width:940px;
+    margin:0 auto;
+    padding-bottom:30px;
 }
 
 h1 {
-	font-size:25px;
-	line-height:40px;
-	margin-bottom:10px;
+    font-size:25px;
+    line-height:40px;
+    margin-bottom:10px;
 }
 
 h3 {
-	font-size:16px;
-	line-height:20px;
+    font-size:16px;
+    line-height:20px;
 }
 
 p {
-	font-size:13px;
-	line-height:18px;
-	margin-bottom:10px;
+    font-size:13px;
+    line-height:18px;
+    margin-bottom:10px;
 }
 
 
@@ -82,12 +82,12 @@ p {
    ========================================================================== */
 
 .cssn_form {
-	padding:10px 0;
+    padding:10px 0;
 }
 
 .cssn_form .box {
-	margin-bottom:10px;
-	vertical-align:baseline;
+    margin-bottom:10px;
+    vertical-align:baseline;
 }
 
 .cssn_form:after,
@@ -104,44 +104,44 @@ Labels
 */
 
 .cssn_form.float_form .box {
-	padding-left:100px;
-	position:relative;
-	min-height:25px;
+    padding-left:100px;
+    position:relative;
+    min-height:25px;
 }
 
 .cssn_form label {
-	padding-top:7px;
-	font-size:12px;
-	line-height:16px;
+    padding-top:7px;
+    font-size:12px;
+    line-height:16px;
 }
 
 .cssn_form.float_form .box label {
-	display:block;
-	float:left;
-	width:90px;
-	position:absolute;
-	top:0;
-	left:0;
-	padding-right:10px;
-	text-align:right;
+    display:block;
+    float:left;
+    width:90px;
+    position:absolute;
+    top:0;
+    left:0;
+    padding-right:10px;
+    text-align:right;
 }
 
 .cssn_form.block_form .box label {
-	display:block;
-	line-height:25px;
-	padding-top:0;
+    display:block;
+    line-height:25px;
+    padding-top:0;
 }
 
 .cssn_form.block_form .radio-box label,
 .cssn_form.block_form .checked-box label,
 .cssn_form.float_form .radio-box label,
 .cssn_form.float_form .checked-box label {
-	position:static;
-	display:inline-block;
-	width:auto;
-	float:none;
-	padding:5px 0 0 0;
-	line-height:inherit;
+    position:static;
+    display:inline-block;
+    width:auto;
+    float:none;
+    padding:5px 0 0 0;
+    line-height:inherit;
 }
 
 /*
@@ -149,23 +149,23 @@ Champs
 */
 
 textarea {
-	resize: vertical;
-	max-width: 100%;
-	overflow: auto
+    resize: vertical;
+    max-width: 100%;
+    overflow: auto
 }
 
 input[type="submit"],
 input[type="image"],
 button {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .cssn_form input[type=radio],
 .cssn_form input[type=checkbox]{
-	margin:0;
-	vertical-align:middle;
-	height:12px;
-	width:12px;
+    margin:0;
+    vertical-align:middle;
+    height:12px;
+    width:12px;
 }
 
 .cssn_form textarea,
@@ -175,45 +175,45 @@ button {
 .cssn_form input[type=password] {
     color:#333;
     font-size:12px;
-	font-family:inherit;
+    font-family:inherit;
     background:#fafafa;
-	vertical-align:middle;
-	outline:0;
-	width:200px;
+    vertical-align:middle;
+    outline:0;
+    width:200px;
     border:1px solid #999;
-	-moz-border-radius : 2px;
-	-webkit-border-radius : 2px;
-	-webkit-background-clip: padding-box;
-	border-radius : 2px;
+    -moz-border-radius : 2px;
+    -webkit-border-radius : 2px;
+    -webkit-background-clip: padding-box;
+    border-radius : 2px;
     -moz-box-shadow:inset 1px 1px 1px #ccc;
     -webkit-box-shadow:inset 1px 1px 1px #ccc;
     box-shadow:inset 1px 1px 1px #ccc;
-	-moz-transition: all 0.3s ease;
-	-webkit-transition: all 0.3s ease;
-	-o-transition: all 0.3s ease;
-	transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .cssn_form .faux-input {
-	display:inline-block;*display:inline;zoom:1;
-	line-height:25px;
+    display:inline-block;*display:inline;zoom:1;
+    line-height:25px;
 }
 
 .cssn_form .faux-input,
 .cssn_form [disabled] {
-	color:#999;
-	cursor: not-allowed;
+    color:#999;
+    cursor: not-allowed;
 }
 
 .cssn_form textarea {
-	padding: 5px;
+    padding: 5px;
 }
 
 .cssn_form .faux-input,
 .cssn_form input[type=text],
 .cssn_form input[type=email],
 .cssn_form input[type=password] {
-	line-height:25px;
+    line-height:25px;
     height:25px;
     padding:0 5px;
     vertical-align:middle;
@@ -223,9 +223,9 @@ button {
 .cssn_form input[type=text]:focus,
 .cssn_form input[type=email]:focus,
 .cssn_form input[type=password]:focus {
-	-moz-box-shadow: inset 1px 1px 1px #dedede, 0 0 2px rgba(0,0,0,0.3);
-	-webkit-box-shadow: inset 1px 1px 1px #dedede, 0 0 2px rgba(0,0,0,0.3);
-	box-shadow: inset 1px 1px 1px #dedede, 0 0 2px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 1px 1px 1px #dedede, 0 0 2px rgba(0,0,0,0.3);
+    -webkit-box-shadow: inset 1px 1px 1px #dedede, 0 0 2px rgba(0,0,0,0.3);
+    box-shadow: inset 1px 1px 1px #dedede, 0 0 2px rgba(0,0,0,0.3);
     color:#000;
     background-color:#fff;
     border-color:#333;
@@ -236,10 +236,10 @@ Aide
 */
 
 .cssn_form small {
-	display:block;
-	font-size:11px;
-	color:#676767;
-	line-height:16px;
+    display:block;
+    font-size:11px;
+    color:#676767;
+    line-height:16px;
 }
 
 
@@ -248,39 +248,39 @@ Aide
    ========================================================================== */
 
 .le-button {
-	padding:0;
+    padding:0;
     background:#fff;
-	border:0px;
-	margin:0;
-	vertical-align:middle;
+    border:0px;
+    margin:0;
+    vertical-align:middle;
 }
 
 .le-button,
 .le-button > span {
-	display:inline-block;*display:inline;zoom:1;
+    display:inline-block;*display:inline;zoom:1;
 }
 
 .le-button > span {
-	padding:0 5px;
-	height:25px;
+    padding:0 5px;
+    height:25px;
     color:#333;
     text-transform:uppercase;
     font-size:12px;
-	line-height:25px;
+    line-height:25px;
     border:1px solid #ccc;
-	-moz-border-radius : 3px;
-	-webkit-border-radius : 3px;
-	-webkit-background-clip: padding-box;
-	border-radius : 3px;
-	-moz-transition: background 0.3s ease;
-	-webkit-transition: background 0.3s ease;
-	-o-transition: background 0.3s ease;
-	transition: background 0.3s ease;
+    -moz-border-radius : 3px;
+    -webkit-border-radius : 3px;
+    -webkit-background-clip: padding-box;
+    border-radius : 3px;
+    -moz-transition: background 0.3s ease;
+    -webkit-transition: background 0.3s ease;
+    -o-transition: background 0.3s ease;
+    transition: background 0.3s ease;
 }
 
 .le-button > span:hover {
-	background:#e0e0e0;
-	border-color:#999;
+    background:#e0e0e0;
+    border-color:#999;
 }
 
 /* =============================================================================
@@ -288,27 +288,27 @@ Aide
    ========================================================================== */
 
 #main-container {
-	width:600px;
-	padding-top:20px;
+    width:600px;
+    padding-top:20px;
 }
 
 #html_to_clean {
-	display:block;
-	width: 582px;
-	font-family: monospace;
+    display:block;
+    width: 582px;
+    font-family: monospace;
 }
 
 div.submit {
-	padding-top:10px;
-	text-align:right;
+    padding-top:10px;
+    text-align:right;
 }
 
 div.submit button {
-	padding:5px;
+    padding:5px;
 }
 
 div.submit button:hover {
-	border-color:#ccc;
+    border-color:#ccc;
 }
 
 /* ----------------------------------------------------------
