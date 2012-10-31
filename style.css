@@ -82,10 +82,13 @@ p {
    ========================================================================== */
 
 .cssn_form {
+    overflow:hidden;
     padding:10px 0;
 }
 
 .cssn_form .box {
+    width: 50%;
+    float:left;
     margin-bottom:10px;
     vertical-align:baseline;
 }

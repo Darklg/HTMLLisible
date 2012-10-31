@@ -31,6 +31,9 @@ include dirname(__FILE__).'/inc/header.php';
                         <li class="box">
                             <?php include dirname(__FILE__).'/inc/tpl/form_type_indentation.php'; ?>
                         </li>
+                        <li class="box">
+                            <?php include dirname(__FILE__).'/inc/tpl/form_convert_html_to_xhtml.php'; ?>
+                        </li>
                     </ul>
                 </fieldset>
             </form>

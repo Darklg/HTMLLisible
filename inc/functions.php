@@ -47,9 +47,12 @@ class HTMLLisible {
     public $retour_html = '';
     public $user_options = array(
         'indentation' => 4,
+        'convert_html_to_xhtml' => 1
     );
 
-    private $options_bool = array();
+    private $options_bool = array(
+        'convert_html_to_xhtml'
+    );
 
     public function __construct(){
 
@@ -62,7 +65,10 @@ class HTMLLisible {
 
             $html = $_POST['html_to_clean'];
 
-            $html = $this->html_to_xhtml($html);
+            if($this->user_options['convert_html_to_xhtml']){
+                $html = $this->html_to_xhtml($html);
+            }
+
             $html = $this->mise_ecart_blocs($html);
             $html = $this->HTML_Order($html);
             $html = $this->HTML_Lisible($html);
@@ -102,6 +108,7 @@ class HTMLLisible {
             }
         }
 
+        // On parse les options de type bool
         foreach($this->options_bool as $option){
             $this->user_options[$option] = (isset($options[$option]) && $options[$option] == '1');
         }
