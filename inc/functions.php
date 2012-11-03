@@ -141,8 +141,9 @@ class HTMLLisible {
     }
 
     private function remise_blocs($retour_html){
-        // On remet les blocks
-        foreach($this->blocs_isoles as $type_bloc => $bloc){
+        $blocks_isoles = array_reverse($this->blocs_isoles);
+        // On remet les blocks dans le bon ordre
+        foreach($blocks_isoles as $type_bloc => $bloc){
             foreach($bloc['list'] as $id_bloc => $bloca){
                 $retour_html = str_replace('<##__'.$type_bloc.'__'.$id_bloc.'__'.$type_bloc.'__##/>', $bloca, $retour_html);
             }
