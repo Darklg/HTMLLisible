@@ -19,31 +19,38 @@ class HTMLLisible {
     private $blocs_isoles = array(
         'php' => array(
             'regex' => '#<\?php(.*)\?>#isU',
-            'list' => array()
+            'list' => array(),
+            'clean_level' => 0
         ),
         'css' => array(
             'regex' => '#<style(.*)\/style>#isU',
-            'list' => array()
+            'list' => array(),
+            'clean_level' => 0
         ),
         'js' => array(
             'regex' => '#<script(.*)\/script>#isU',
-            'list' => array()
+            'list' => array(),
+            'clean_level' => 0
         ),
         'pre' => array(
             'regex' => '#<pre(.*)\/pre>#isU',
-            'list' => array()
+            'list' => array(),
+            'clean_level' => 0
         ),
         'textarea' => array(
             'regex' => '#<textarea(.*)\/textarea>#isU',
-            'list' => array()
+            'list' => array(),
+            'clean_level' => 0
         ),
         'cond' => array(
             'regex' => '#<!--(.*)-->#isU',
-            'list' => array()
+            'list' => array(),
+            'clean_level' => 0
         ),
         'solotags' => array(
             'regex' => '#<([a-z0-9-]{3,})([^\>]*)\/>#i',
-            'list' => array()
+            'list' => array(),
+            'clean_level' => 1
         ),
     );
 
@@ -73,12 +80,14 @@ class HTMLLisible {
 
             $html = $_POST['html_to_clean'];
 
+            $html = $this->mise_ecart_blocs($html);
+
             if($this->user_options['convert_html_to_xhtml']){
                 $html = $this->html_to_xhtml($html);
             }
 
-            $html = $this->mise_ecart_blocs($html);
             $html = $this->HTML_Order($html);
+            $html = $this->mise_ecart_blocs($html, 1);
             $html = $this->HTML_Lisible($html);
             $html = $this->remise_blocs($html);
             $html = $this->little_clean($html);
@@ -124,12 +133,13 @@ class HTMLLisible {
     }
 
     // On met de côté certains contenus de blocs
-    private function mise_ecart_blocs($html){
+    private function mise_ecart_blocs($html, $clean_level = 0){
         foreach($this->blocs_isoles as $type_bloc => $bloc){
             $matches = array();
-            preg_match_all($this->blocs_isoles[$type_bloc]['regex'],$html,$matches);
+            preg_match_all($bloc['regex'],$html,$matches);
             $i=0;
-            if(isset($matches[0])){
+            // Si on a des résultats et que le niveau de clean est ok
+            if(isset($matches[0]) && $bloc['clean_level'] == $clean_level){
                 foreach($matches[0] as $a_bloc){
                     $i++;
                     $html = str_replace($a_bloc,'<##__'.$type_bloc.'__'.$i.'__'.$type_bloc.'__##/>',$html,$this->limit_str_replace);
