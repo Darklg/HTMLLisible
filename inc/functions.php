@@ -42,7 +42,7 @@ class HTMLLisible {
             'list' => array()
         ),
         'solotags' => array(
-            'regex' => '#<([a-z0-9-]+)([^\>]*)\/>#i',
+            'regex' => '#<([a-z0-9-]{3,})([^\>]*)\/>#i',
             'list' => array()
         ),
     );
@@ -179,7 +179,7 @@ class HTMLLisible {
         $l_html = explode("\n",$html);
         $r_html = '';
         foreach($l_html as $ligne){
-            if(!preg_match('#^([\s]+)$#',$ligne)){
+            if(!preg_match('#^([\s]+)$#',$ligne) && $ligne != ''){
                 $r_html .= $ligne."\n";
             }
         }
@@ -196,8 +196,8 @@ class HTMLLisible {
         $html = preg_replace('/\<(img|input|meta|link|param|base)([^>]*)([ "\'a-z]{1})\>/isU', '<$1$2$3/>', $html);
 
         $html = str_replace('</param>','',$html);
-        $html = str_replace(array('<br >','<br>'),'<br />',$html);
-        $html = str_replace(array('<hr >','<hr>'),'<hr />',$html);
+        $html = str_replace(array('<br >','<br>','<br/>'),'<br />',$html);
+        $html = str_replace(array('<hr >','<hr>','<hr/>'),'<hr />',$html);
 
         $html = str_replace('<DOCTYPE HTML','<!DOCTYPE HTML',$html);
 
@@ -275,6 +275,10 @@ class HTMLLisible {
             $was_content = $is_content;
 
         }
+
+
+        // Suppression des sauts de ligne avant br
+        $retour_html = preg_replace('/(\s+)<br \/>/isU', '<br />', $retour_html);
 
         return $retour_html;
 
