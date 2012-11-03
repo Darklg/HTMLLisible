@@ -1,6 +1,4 @@
-<?php
-include dirname(__FILE__).'/inc/header.php';
-?>
+<?php include dirname(__FILE__).'/inc/header.php'; ?>
 <!DOCTYPE HTML>
 <html lang="fr-FR">
     <head>
@@ -13,9 +11,7 @@ include dirname(__FILE__).'/inc/header.php';
             <h1>HTMLLisible</h1>
             <p>
                 <strong>HTMLLisible</strong>
-                est un script permettant de réindenter vos bouts de code HTML,
-                afin de les rendre plus lisibles.
-                Il filtre le contenu des balises JS, CSS, TEXTAREA, PRE et PHP afin de ne rien casser.
+                est un script permettant de réindenter vos bouts de code HTML,afin de les rendre plus lisibles.Il filtre le contenu des balises JS, CSS, TEXTAREA, PRE et PHP afin de ne rien casser.
             </p>
             <form class="cssn_form" action="" method="post">
                 <div>

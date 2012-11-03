@@ -165,8 +165,8 @@ class HTMLLisible {
     private function HTML_Order($html){
 
         // Tout sur une ligne
-        $html = preg_replace('#([\n\t\r]+)#', '', $html);
-        $html = preg_replace('#([\s]+)([ ]+)([\s]+)#', '', $html);
+        $html = preg_replace('/([\n\t\r]+)/is', '', $html);
+        $html = preg_replace('/([\s]{2,})/is', ' ', $html);
 
         // Chaque balise sur une ligne
         $html = str_replace('>', '>' . "\n", $html);
