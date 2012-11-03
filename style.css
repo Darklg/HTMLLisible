@@ -49,57 +49,56 @@ img,input[type=image]{vertical-align:bottom;}
    ========================================================================== */
 
 body {
-    font:62.5% Arial, Helvetica, sans-serif;
-    color:#212121; /* Dark Grey is the new black */
+    font: 62.5% Arial,Helvetica,sans-serif;
+    color: #212121;
 }
 
 #main-container {
-    width:940px;
-    margin:0 auto;
-    padding-bottom:30px;
+    width: 940px;
+    margin: 0 auto;
+    padding-bottom: 30px;
 }
 
 h1 {
-    font-size:25px;
-    line-height:40px;
-    margin-bottom:10px;
+    margin-bottom: 10px;
+    font-size: 25px;
+    line-height: 40px;
 }
 
 h3 {
-    font-size:16px;
-    line-height:20px;
+    font-size: 16px;
+    line-height: 20px;
 }
 
 p {
-    font-size:13px;
-    line-height:18px;
-    margin-bottom:10px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    line-height: 18px;
 }
-
 
 /* =============================================================================
    Formulaires
    ========================================================================== */
 
 .cssn_form {
-    overflow:hidden;
-    padding:10px 0;
+    padding: 10px 0;
+    overflow: hidden;
 }
 
 .cssn_form .box {
+    float: left;
     width: 50%;
-    float:left;
-    margin-bottom:10px;
-    vertical-align:baseline;
+    margin-bottom: 10px;
+    vertical-align: baseline;
 }
 
 .cssn_form:after,
 .cssn_form .box:after {
     content: " ";
     display: block;
-    height: 0;
-    clear: both;
     visibility: hidden;
+    clear: both;
+    height: 0;
 }
 
 /*
@@ -107,44 +106,44 @@ Labels
 */
 
 .cssn_form.float_form .box {
-    padding-left:100px;
-    position:relative;
-    min-height:25px;
+    position: relative;
+    padding-left: 100px;
+    min-height: 25px;
 }
 
 .cssn_form label {
-    padding-top:7px;
-    font-size:12px;
-    line-height:16px;
+    padding-top: 7px;
+    font-size: 12px;
+    line-height: 16px;
 }
 
 .cssn_form.float_form .box label {
-    display:block;
-    float:left;
-    width:90px;
-    position:absolute;
-    top:0;
-    left:0;
-    padding-right:10px;
-    text-align:right;
+    display: block;
+    float: left;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90px;
+    padding-right: 10px;
+    text-align: right;
 }
 
 .cssn_form.block_form .box label {
-    display:block;
-    line-height:25px;
-    padding-top:0;
+    display: block;
+    padding-top: 0;
+    line-height: 25px;
 }
 
 .cssn_form.block_form .radio-box label,
 .cssn_form.block_form .checked-box label,
 .cssn_form.float_form .radio-box label,
 .cssn_form.float_form .checked-box label {
-    position:static;
-    display:inline-block;
-    width:auto;
-    float:none;
-    padding:5px 0 0 0;
-    line-height:inherit;
+    display: inline-block;
+    float: none;
+    position: static;
+    width: auto;
+    padding: 5px 0 0 0;
+    line-height: inherit;
 }
 
 /*
@@ -152,9 +151,9 @@ Champs
 */
 
 textarea {
-    resize: vertical;
     max-width: 100%;
-    overflow: auto
+    overflow: auto;
+    resize: vertical;
 }
 
 input[type="submit"],
@@ -164,11 +163,11 @@ button {
 }
 
 .cssn_form input[type=radio],
-.cssn_form input[type=checkbox]{
-    margin:0;
-    vertical-align:middle;
-    height:12px;
-    width:12px;
+.cssn_form input[type=checkbox] {
+    width: 12px;
+    height: 12px;
+    margin: 0;
+    vertical-align: middle;
 }
 
 .cssn_form textarea,
@@ -176,35 +175,37 @@ button {
 .cssn_form input[type=text],
 .cssn_form input[type=email],
 .cssn_form input[type=password] {
-    color:#333;
-    font-size:12px;
-    font-family:inherit;
-    background:#fafafa;
-    vertical-align:middle;
-    outline:0;
-    width:200px;
-    border:1px solid #999;
-    -moz-border-radius : 2px;
-    -webkit-border-radius : 2px;
+    width: 200px;
+    border: 1px solid #999;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    font-family: inherit;
+    font-size: 12px;
+    vertical-align: middle;
+    outline: 0;
+    color: #333;
+    background: #fafafa;
     -webkit-background-clip: padding-box;
-    border-radius : 2px;
-    -moz-box-shadow:inset 1px 1px 1px #ccc;
-    -webkit-box-shadow:inset 1px 1px 1px #ccc;
-    box-shadow:inset 1px 1px 1px #ccc;
-    -moz-transition: all 0.3s ease;
+    -webkit-box-shadow: inset 1px 1px 1px #ccc;
+    -moz-box-shadow: inset 1px 1px 1px #ccc;
+    box-shadow: inset 1px 1px 1px #ccc;
     -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
 
 .cssn_form .faux-input {
-    display:inline-block;*display:inline;zoom:1;
-    line-height:25px;
+    display: inline-block;
+    zoom: 1;
+    line-height: 25px;
+    *display: inline;
 }
 
 .cssn_form .faux-input,
 .cssn_form [disabled] {
-    color:#999;
+    color: #999;
     cursor: not-allowed;
 }
 
@@ -216,22 +217,22 @@ button {
 .cssn_form input[type=text],
 .cssn_form input[type=email],
 .cssn_form input[type=password] {
-    line-height:25px;
-    height:25px;
-    padding:0 5px;
-    vertical-align:middle;
+    height: 25px;
+    padding: 0 5px;
+    line-height: 25px;
+    vertical-align: middle;
 }
 
 .cssn_form textarea:focus,
 .cssn_form input[type=text]:focus,
 .cssn_form input[type=email]:focus,
 .cssn_form input[type=password]:focus {
-    -moz-box-shadow: inset 1px 1px 1px #dedede, 0 0 2px rgba(0,0,0,0.3);
-    -webkit-box-shadow: inset 1px 1px 1px #dedede, 0 0 2px rgba(0,0,0,0.3);
-    box-shadow: inset 1px 1px 1px #dedede, 0 0 2px rgba(0,0,0,0.3);
-    color:#000;
-    background-color:#fff;
-    border-color:#333;
+    border-color: #333;
+    color: #000;
+    background-color: #fff;
+    -webkit-box-shadow: inset 1px 1px 1px #dedede,0 0 2px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 1px 1px 1px #dedede,0 0 2px rgba(0,0,0,0.3);
+    box-shadow: inset 1px 1px 1px #dedede,0 0 2px rgba(0,0,0,0.3);
 }
 
 /*
@@ -239,51 +240,52 @@ Aide
 */
 
 .cssn_form small {
-    display:block;
-    font-size:11px;
-    color:#676767;
-    line-height:16px;
+    display: block;
+    font-size: 11px;
+    line-height: 16px;
+    color: #676767;
 }
-
 
 /* =============================================================================
    Boutons par défaut
    ========================================================================== */
 
 .le-button {
-    padding:0;
-    background:#fff;
-    border:0px;
-    margin:0;
-    vertical-align:middle;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: middle;
+    background: #fff;
 }
 
 .le-button,
 .le-button > span {
-    display:inline-block;*display:inline;zoom:1;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
 }
 
 .le-button > span {
-    padding:0 5px;
-    height:25px;
-    color:#333;
-    text-transform:uppercase;
-    font-size:12px;
-    line-height:25px;
-    border:1px solid #ccc;
-    -moz-border-radius : 3px;
-    -webkit-border-radius : 3px;
+    height: 25px;
+    padding: 0 5px;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-size: 12px;
+    line-height: 25px;
+    color: #333;
     -webkit-background-clip: padding-box;
-    border-radius : 3px;
-    -moz-transition: background 0.3s ease;
     -webkit-transition: background 0.3s ease;
+    -moz-transition: background 0.3s ease;
     -o-transition: background 0.3s ease;
     transition: background 0.3s ease;
 }
 
 .le-button > span:hover {
-    background:#e0e0e0;
-    border-color:#999;
+    border-color: #999;
+    background: #e0e0e0;
 }
 
 /* =============================================================================
@@ -291,27 +293,26 @@ Aide
    ========================================================================== */
 
 #main-container {
-    width:600px;
-    padding-top:20px;
+    width: 600px;
+    padding-top: 20px;
 }
 
 #html_to_clean {
-    display:block;
-    width: 582px;
+    display: block;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
     font-family: monospace;
 }
 
 div.submit {
-    padding-top:10px;
-    text-align:right;
-}
-
-div.submit button {
-    padding:5px;
+    padding-top: 10px;
+    text-align: right;
 }
 
 div.submit button:hover {
-    border-color:#ccc;
+    border-color: #ccc;
 }
 
 /* ----------------------------------------------------------
@@ -319,8 +320,8 @@ div.submit button:hover {
    ------------------------------------------------------- */
 
 #fork_me {
-    position:absolute;
-    top:0;
-    right:0;
-    border:0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0;
 }
