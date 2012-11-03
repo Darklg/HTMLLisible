@@ -17,10 +17,6 @@ class HTMLLisible {
         array("\t", '1 tab')
     );
     private $blocs_isoles = array(
-        'solotags' => array(
-            'regex' => '#<([^\>]*)\/>#i',
-            'list' => array()
-        ),
         'php' => array(
             'regex' => '#<\?php(.*)\?>#isU',
             'list' => array()
@@ -43,6 +39,10 @@ class HTMLLisible {
         ),
         'cond' => array(
             'regex' => '#<!--(.*)-->#isU',
+            'list' => array()
+        ),
+        'solotags' => array(
+            'regex' => '#<([a-z0-9-]+)([^\>]*)\/>#i',
             'list' => array()
         ),
     );
