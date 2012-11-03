@@ -190,7 +190,7 @@ class HTMLLisible {
         return $html;
     }
 
-    //
+    // Convert HTML to xHTML
     private function html_to_xhtml($html){
         $html = preg_replace('/\<(img|input|meta|link|param|base)([^>]*)([ "\'a-z]{1})\>/isU', '<$1$2$3/>', $html);
 
