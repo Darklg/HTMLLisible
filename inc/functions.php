@@ -33,6 +33,14 @@ class HTMLLisible {
             'regex' => '#<script(.*)\/script>#isU',
             'list' => array()
         ),
+        'pre' => array(
+            'regex' => '#<pre(.*)\/pre>#isU',
+            'list' => array()
+        ),
+        'textarea' => array(
+            'regex' => '#<textarea(.*)\/textarea>#isU',
+            'list' => array()
+        ),
         'cond' => array(
             'regex' => '#<!--(.*)-->#isU',
             'list' => array()
