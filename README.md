@@ -1,6 +1,6 @@
 # HTMLLisible
 
-Simple outil de reformatage du HTML
+Reindentation & Correction de HTML
 
 
 ## Licence MIT
