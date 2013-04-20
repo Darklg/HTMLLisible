@@ -17,6 +17,12 @@ class HTMLLisible {
         array("\t", '1 tab')
     );
     private $blocs_isoles = array(
+        'phpattributes' => array(
+            'regex' => '/\=\"\<\?php(.*)\?\>\"/is',
+            'list' => array(),
+            'clean_level' => 0,
+            'mode' => 'inline'
+        ),
         'php' => array(
             'regex' => '#<\?php(.*)\?>#isU',
             'list' => array(),
@@ -51,7 +57,7 @@ class HTMLLisible {
             'regex' => '#<([a-z0-9-]{3,})([^\>]*)\/>#i',
             'list' => array(),
             'clean_level' => 1
-        ),
+        )
     );
 
     /* Valeurs initiales */
@@ -81,6 +87,7 @@ class HTMLLisible {
             $html = $_POST['html_to_clean'];
 
             $html = $this->mise_ecart_blocs($html);
+
 
             if($this->user_options['convert_html_to_xhtml']){
                 $html = $this->html_to_xhtml($html);
@@ -135,6 +142,7 @@ class HTMLLisible {
     // On met de côté certains contenus de blocs
     private function mise_ecart_blocs($html, $clean_level = 0){
         foreach($this->blocs_isoles as $type_bloc => $bloc){
+            $mode = isset($bloc['mode']) ? $bloc['mode'] : 'full';
             $matches = array();
             preg_match_all($bloc['regex'],$html,$matches);
             $i=0;
@@ -142,7 +150,8 @@ class HTMLLisible {
             if(isset($matches[0]) && $bloc['clean_level'] == $clean_level){
                 foreach($matches[0] as $a_bloc){
                     $i++;
-                    $html = str_replace($a_bloc,'<##__'.$type_bloc.'__'.$i.'__'.$type_bloc.'__##/>',$html,$this->limit_str_replace);
+                    $replace = $this->get_bloc_isole_syntaxe($type_bloc, $i, $mode);
+                    $html = str_replace($a_bloc,$replace,$html,$this->limit_str_replace);
                     $this->blocs_isoles[$type_bloc]['list'][$i] = $a_bloc;
                 }
             }
@@ -154,11 +163,21 @@ class HTMLLisible {
         $blocks_isoles = array_reverse($this->blocs_isoles);
         // On remet les blocks dans le bon ordre
         foreach($blocks_isoles as $type_bloc => $bloc){
+            $mode = isset($bloc['mode']) ? $bloc['mode'] : 'full';
             foreach($bloc['list'] as $id_bloc => $bloca){
-                $retour_html = str_replace('<##__'.$type_bloc.'__'.$id_bloc.'__'.$type_bloc.'__##/>', $bloca, $retour_html);
+                $replace = $this->get_bloc_isole_syntaxe($type_bloc, $id_bloc, $mode);
+                $retour_html = str_replace($replace, $bloca, $retour_html);
             }
         }
         return $retour_html;
+    }
+
+    private function get_bloc_isole_syntaxe($type, $id, $mode = 'full'){
+        $return = '##__' . $type . '__' . $id . '__' . $type . '__##';
+        if($mode == 'full'){
+            $return = '<' . $return . '/>';
+        }
+        return $return;
     }
 
     // Rangement du HTML
@@ -194,6 +213,9 @@ class HTMLLisible {
             }
         }
         $html = $r_html;
+
+        // Derniers espaces
+        $html = str_replace('?>" >', '?>">', $html);
 
         // Trim final
         $html = trim($html);
@@ -289,6 +311,10 @@ class HTMLLisible {
 
         // Suppression des sauts de ligne avant br
         $retour_html = preg_replace('/(\s+)<br \/>/isU', '<br />', $retour_html);
+
+        // Derniers espaces
+        $retour_html = preg_replace('/>(\s+)\./is', '>.', $retour_html);
+
 
         return $retour_html;
 
