@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8" />
         <title>HTMLLisible</title>
-        <link rel="stylesheet" href="style.css" type="text/css" />
+        <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
     </head>
     <body>
         <div id="main-container">

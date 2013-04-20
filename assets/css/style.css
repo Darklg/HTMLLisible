@@ -316,6 +316,11 @@ div.submit button:hover {
     border-color: #ccc;
 }
 
+#demo-button {
+    opacity: 0.70;
+    filter: alpha(opacity=70);
+}
+
 /* ----------------------------------------------------------
    Banniere Github
    ------------------------------------------------------- */
