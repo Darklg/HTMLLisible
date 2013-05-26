@@ -18,13 +18,13 @@ class HTMLLisible {
     );
     private $blocs_isoles = array(
         'phpattributes' => array(
-            'regex' => '/\=\"\<\?php(.*)\?\>\"/is',
+            'regex' => '/\=\"\<\?(.*)\?\>\"/is',
             'list' => array(),
             'clean_level' => 0,
             'mode' => 'inline'
         ),
         'php' => array(
-            'regex' => '#<\?php(.*)\?>#isU',
+            'regex' => '#<\?(.*)\?>#isU',
             'list' => array(),
             'clean_level' => 0
         ),
@@ -201,7 +201,7 @@ class HTMLLisible {
     private function little_clean($html){
 
         // Attributs contenant du PHP
-        $html = preg_replace('#"([\s]+)<\?php#isU', '"<?php', $html);
+        $html = preg_replace('#"([\s]+)<\?#isU', '"<?', $html);
         $html = preg_replace('#\?>([\s]+)"#isU', '?>"', $html);
 
         // Suppression des éventuelles lignes vides
