@@ -218,7 +218,8 @@ class HTMLLisible {
         $html = str_replace('?>" >', '?>">', $html);
         $html = str_replace('" >', '">', $html);
         $html = preg_replace('/([a-z]{1}) >/', '$1>', $html);
-        $html = preg_replace('/class\=\"([^"]*) \"/', 'class="$1"', $html);
+        // Trim attributes values
+        $html = preg_replace('/\=\"([^"]*) \"/', '="$1"', $html);
 
         // Trim final
         $html = trim($html);
