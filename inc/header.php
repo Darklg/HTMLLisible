@@ -11,3 +11,6 @@ if ( get_magic_quotes_gpc() ) {
 }
 
 $HTML_Lisible = new HTMLLisible();
+
+// Bugfix Chrome
+header('X-XSS-Protection: 0');
