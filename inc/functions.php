@@ -216,6 +216,8 @@ class HTMLLisible {
 
         // Derniers espaces
         $html = str_replace('?>" >', '?>">', $html);
+        $html = str_replace('" >', '">', $html);
+        $html = preg_replace('/([a-z]{1}) >/', '$1>', $html);
 
         // Trim final
         $html = trim($html);
