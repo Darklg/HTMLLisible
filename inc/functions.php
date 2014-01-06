@@ -18,7 +18,7 @@ class HTMLLisible {
     );
     private $blocs_isoles = array(
         'phpattributes' => array(
-            'regex' => '/\=\"\<\?(.*)\?\>\"/is',
+            'regex' => '/\=\"\<\?(.*)\?\>\"/isU',
             'list' => array(),
             'clean_level' => 0,
             'mode' => 'inline'
