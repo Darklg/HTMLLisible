@@ -221,6 +221,9 @@ class HTMLLisible {
         // Trim attributes values
         $html = preg_replace('/\=\"([^"]*) \"/', '="$1"', $html);
 
+        // Add at least one space after an opening PHP tag
+        $html = preg_replace('/\<\?php([a-z0-9]{1})/', '<?php $1', $html);
+
         // Trim final
         $html = trim($html);
 
