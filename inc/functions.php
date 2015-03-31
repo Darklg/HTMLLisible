@@ -218,8 +218,13 @@ class HTMLLisible {
         $html = str_replace('?>" >', '?>">', $html);
         $html = str_replace('" >', '">', $html);
         $html = preg_replace('/([a-z]{1}) >/', '$1>', $html);
+
         // Trim attributes values
         $html = preg_replace('/\=\"([^"]*) \"/', '="$1"', $html);
+
+        // Trim links
+        $html = preg_replace('/<(a|h1|h2|h3|h4|h5)([^>]*)>([\s]*)<\?php echo ([^\;]*); \?>([\s]*)<\/(a|h1|h2|h3|h4|h5)>/isU', '<$1$2><?php echo $4 ?></$6>', $html);
+
 
         // Add at least one space after an opening PHP tag
         $html = preg_replace('/\<\?php([a-z0-9]{1})/', '<?php $1', $html);
